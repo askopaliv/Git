@@ -9,8 +9,8 @@ def toNegative(num):
             list[i] = 0
             num -= checking
         checking = math.pow(2, 7-i)
-    
-   for i in range(len(list)):
+   list[0] = 1
+   for i in range(len(list) +1, 1):
        if(list[i] == 0 and makeit[i] ==1 or list[i] == 1 and makeIt[i] == 0):
            list[i] = 1
        elif(list[i] == 1 and makeIt[i] == 1):
