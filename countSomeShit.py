@@ -21,9 +21,6 @@ def top_n_words(filename, n):
     return sorted_words[:n]
 
 def main():
-    if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <filename> <N>")
-        sys.exit(1)
 
     filename, n_str = sys.argv[1], sys.argv[2]
     try:
