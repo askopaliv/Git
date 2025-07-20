@@ -24,8 +24,8 @@ def check_file_with_virustotal(file_hash):
 
 def monitor_folder():
     known_files = set(os.listdir(FOLDER_TO_WATCH))
-    print("🔍 מתחיל מעקב...")
-    while True:
+    print("🔍 מתחיל מעקב...")                       
+    while True:                    
         current_files = set(os.listdir(FOLDER_TO_WATCH))
         new_files = current_files - known_files
         for file_name in new_files:
